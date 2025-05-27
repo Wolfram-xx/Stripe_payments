@@ -1,9 +1,14 @@
 # StripePayments Django App
 
 Django-проект с интеграцией Stripe Checkout и Docker.
+
 Из ТЗ не сделано:
+
 Реализовать не Stripe Session, а Stripe Payment Intent. (не разобрался в документации)
+
 Адрес сервера - http://103.71.21.184:8000/
+
+Данные админки внизу
 
 
 ---
@@ -77,6 +82,6 @@ STRIPE_PUBLISHABLE_KEY=pk_test_...
 ## Django Admin
 Админка Django доступна по адресу:
 
-http://localhost:8000/admin/
+http://103.71.21.184:8000/admin/
 
 Используйте логин/пароль: admin/admin.
