@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body style="display: flex">
+    {% for item in items %}
+        <div style="margin: 10px">
+            <h1>{{item.name}}</h1>
+            <p>{{item.description}}</p>
+            <p>{{item.price}} {{item.currency}}</p>
+            <button onclick="window.location.href='/item/{{item.id}}'">Open</button>
+            <button onclick="window.location.href='/add_to_order/{{item.id}}'">Add to order</button>
+
+        </div>
+    {% endfor %}
+        <button onclick="window.location.href='/create/'">Create</button>
+        <button onclick="window.location.href='/order/'">My Order</button>
+</body>
+</html>

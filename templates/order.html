@@ -1,0 +1,43 @@
+{% load multiply %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My order</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    {% if order.orderitem_set.all %}
+    <ul>
+        {% for order_item in order.orderitem_set.all %}
+            <li>
+                {{ order_item.item.name }}:
+                {{ order_item.quantitiy }} × {{ order_item.item.price }} =
+                {{ order_item.quantitiy|multiply:order_item.item.price }} {{order_item.item.currency}}
+                <button onclick="window.location.href='/delete_from_order/{{order_item.item.id}}'">Delete</button>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Итоговая сумма:</strong> {{ order.total_price }}.</p>
+    <button id="buy-button">Buy</button>
+    {% else %}
+        <p>Ваш заказ пуст.</p>
+    {% endif %}
+
+    <script type="text/javascript">
+          var stripe = Stripe('{{public_key}}');
+          var buyButton = document.getElementById('buy-button');
+          buyButton.addEventListener('click', function() {
+            // Create a new Checkout Session using the server-side endpoint
+            // Redirect to Stripe Session Checkout
+            fetch('/buy_order/{{order.id}}', {method: 'GET'})
+            .then(response => response.json())
+            .then(session => {
+                
+                return stripe.redirectToCheckout({ 'sessionId': session.session.id })
+            })
+          });
+    </script>
+</body>
+</html>

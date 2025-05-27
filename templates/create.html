@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Item</title>
+</head>
+<body>
+    <form method="post" action="/create_item/">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="number" name="price" placeholder="Price" required>
+        <select name="currency">
+            <option value=''>Валюта</option>
+            <option value="rub">RUB</option>
+            <option value="usd">USD</option>
+        </select>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
